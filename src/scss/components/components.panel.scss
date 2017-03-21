@@ -1,0 +1,33 @@
+// ==========================================================================
+// Panel
+// ==========================================================================
+
+@import "../base";
+
+// Here we set a variable assuming that default and module settings
+// are not set globally. If they have been previously been defined,
+// the following variable will be overriden and will be set to `true`.
+
+$imported-global-settings: false !default;
+
+@if ($imported-global-settings == false) {
+  @warn "Oops! Have you included global settings files?";
+}
+
+.c-panel {
+  position: relative;
+  display: block;
+  background-color: #fff;
+  border: 1px solid #bbb;
+}
+
+.c-panel__head {
+  display: block;
+  padding: rem-calc($global-spacing-unit--small $global-spacing-unit);
+  background-color: #eee;
+  font-weight: bold;
+}
+
+.c-panel__body {
+  padding: rem-calc($global-spacing-unit);
+}

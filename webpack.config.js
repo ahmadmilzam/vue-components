@@ -1,33 +1,83 @@
-var path = require('path')
-var webpack = require('webpack')
+/* eslint-disable */
+const ENV = process.env.NODE_ENV;
+const isTest = ENV === 'test';
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const eslintFriendlyFormatter = require('eslint-friendly-formatter');
+
+// const ChunkHashReplacePlugin = require('chunkhash-replace-webpack-plugin');
+
+const extractSass = new ExtractTextPlugin({
+  filename: 'bundle.[contenthash].css',
+  disable: ENV === 'development'
+});
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    vendor: ['lodash', 'jquery'],
+    app: './main.js',
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    filename: 'bundle.[name].[hash].js',
+    pathinfo: ENV === 'development',
   },
+  context: path.resolve(__dirname, 'src'),
+  devtool: ENV === 'production' ? '#hidden-source-map' : '#eval',
+  bail: ENV === 'production',
   module: {
     rules: [
       {
+        test: /\.scss$/,
+        loader: extractSass.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                minimize: ENV === 'production',
+                sourceMap: ENV === 'development',
+              },
+            },
+            'postcss-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: ['node_modules/csskit-npm/scss'],
+                sourceMap: ENV === 'development'
+              }
+            }
+          ],
+          // use style-loader in development
+          fallback: ['style-loader'],
+        }),
+      },
+      // only lint local *.vue files
+      {
+        enforce: 'pre',
+        test: /.vue$/,
+        loader: 'eslint-loader',
+        options: {
+          // cache: true,
+          formatter: eslintFriendlyFormatter,
+        },
+        exclude: /node_modules/
+      },
+      // but use vue-loader for all *.vue files
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: {
-          loaders: {
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this necessary.
-            'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-          }
-          // other vue-loader options go here
-        }
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        // loader: 'babel-loader',
+        use: [
+          "babel-loader",
+          "eslint-loader",
+        ]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -50,11 +100,25 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  plugins: [
+    autoprefixer,
+    extractSass,
+    new HtmlWebpackPlugin({
+      template: './index.html'
+    }),
+    isTest ? undefined : new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    }),
+    isTest ? undefined : new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons',
+      filename: 'bundle.commons.[hash].js',
+    }),
+    // new HtmlWebpackPlugin()
+  ].filter(p => !!p),
 }
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+if (ENV === 'production') {
+  // module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
@@ -63,7 +127,8 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
+      sourceMap: false,
+      comments: false,
       compress: {
         warnings: false
       }
