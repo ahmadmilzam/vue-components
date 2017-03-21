@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './js/App.vue';
+import App from './App.vue';
 
 import './scss/main.scss';
 

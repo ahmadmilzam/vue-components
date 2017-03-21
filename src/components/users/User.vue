@@ -11,10 +11,15 @@
       </p>
       <div class="o-layout">
         <div class="o-layout__item u-6of12">
-          <user-detail :name="name"></user-detail>
+          <user-detail :name="name"
+                       :age="age"
+                       :resetCb="resetName"
+                       @nameWasReset="name = $event"></user-detail>
         </div>
         <div class="o-layout__item u-6of12">
-          <user-edit></user-edit>
+          <user-edit :age="age"
+                     :updateAgeCb="updateAge"
+                     @ageWasUpdated="age = $event"></user-edit>
         </div>
       </div>
     </div>
@@ -29,6 +34,7 @@
     data() {
       return {
         name: 'Milzam',
+        age: 27,
       };
     },
     components: {
@@ -36,8 +42,14 @@
       'user-edit': UserEdit,
     },
     methods: {
+      resetName(name) {
+        this.name = name;
+      },
       changeName() {
         this.name = 'Ahmad Milzam';
+      },
+      updateAge(newAge) {
+        this.age = newAge;
       },
       setHeight() {
         const panels = this.$el.querySelectorAll('.c-panel');

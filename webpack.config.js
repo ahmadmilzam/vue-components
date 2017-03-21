@@ -17,7 +17,7 @@ const extractSass = new ExtractTextPlugin({
 
 module.exports = {
   entry: {
-    vendor: ['lodash', 'jquery'],
+    // vendor: ['lodash', 'jquery'],
     app: './main.js',
   },
   output: {
@@ -106,14 +106,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html'
     }),
-    isTest ? undefined : new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    }),
-    isTest ? undefined : new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
-      filename: 'bundle.commons.[hash].js',
-    }),
-    // new HtmlWebpackPlugin()
+    // isTest ? undefined : new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor'
+    // }),
+    // isTest ? undefined : new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'commons',
+    //   filename: 'bundle.commons.[hash].js',
+    // }),
   ].filter(p => !!p),
 }
 
