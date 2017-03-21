@@ -1,15 +1,15 @@
 <template>
   <div id="app-container" class="o-wrapper">
-    <user></user>
+    <quote></quote>
   </div>
 </template>
 
 <script>
-  import User from './components/users/User.vue';
+  import Quote from './components/quotes/Quote.vue';
 
   export default {
     components: {
-      user: User,
+      quote: Quote,
     },
   };
 </script>
