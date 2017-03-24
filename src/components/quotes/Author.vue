@@ -5,6 +5,7 @@
         <div class="c-panel__head u-text-center">{{ title }}</div>
         <div class="c-panel__body">
           <slot></slot>
+          <button type="button" @click="counter++">Increase counter ({{ counter }})</button>
         </div>
       </div>
     </div>
@@ -15,7 +16,17 @@
     data() {
       return {
         title: 'Your Author',
+        counter: 0,
       };
+    },
+    destroyed() {
+      console.log('Author component destroyed!');
+    },
+    deactivated() {
+      console.log('Author deactivated!');
+    },
+    activated() {
+      console.log('Author activated!');
     },
   };
 </script>

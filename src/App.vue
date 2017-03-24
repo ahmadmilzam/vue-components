@@ -3,12 +3,21 @@
     <button type="button" @click="selectedComponent = 'quote'">Quote</button>
     <button type="button" @click="selectedComponent = 'newQuote'">New</button>
     <button type="button" @click="selectedComponent = 'author'">Author</button>
-    <component :is="selectedComponent">
+    <!-- the dynamic component will not be destroyed -->
+    <keep-alive>
+      <component :is="selectedComponent">
+        <blockquote cite="http://example.com/facts">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.</p>
+        </blockquote>
+      </component>
+    </keep-alive>
+    <!-- <component :is="selectedComponent">
       <blockquote cite="http://example.com/facts">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.</p>
       </blockquote>
-    </component>
+    </component> -->
     <!-- <quote>
       <blockquote cite="http://example.com/facts">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
