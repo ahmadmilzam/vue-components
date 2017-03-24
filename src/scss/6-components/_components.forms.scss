@@ -1,0 +1,328 @@
+// ==========================================================================
+// Form Base
+// ==========================================================================
+
+// Here we set a variable assuming that default and module settings
+// are not set globally. If they have been previously been defined,
+// the following variable will be overriden and will be set to `true`.
+$imported-global-settings: false !default;
+
+@if ($imported-global-settings == false) {
+  @warn "Oops! Have you included global settings files?";
+}
+
+
+$input-color:                   $color-black !default;
+$input-color--disabled:         $color-ash--dark !default;
+$input-bg:                      $color-white !default;
+$input-bg--disabled:            $color-sand !default;
+$input-border-color:            $color-ash--light !default;
+$input-border-color--active:    $color-blue !default;
+$input-border-color--error:     $color-pink !default;
+$input-border-width:            1px !default;
+$input-border-radius:           $global-border-radius !default;
+$input-height:                  36px !default;
+$input-height--small:           30px !default;
+$input-height--large:           42px !default;
+$input-horizontal-padding:      halve($global-spacing-unit) !default;
+
+$checkradio-bg:                 $color-white !default;
+$checkradio-bg--disabled:       $color-ash !default;
+
+$textarea-height:               $global-spacing-unit * 4 !default;
+
+// private variables
+$input-vertical-padding:        halve($input-height - $global-line-height) - $input-border-width;
+$input-vertical-padding--small: halve($input-height--small - $global-line-height) - $input-border-width;
+$input-vertical-padding--large: halve($input-height--large - $global-line-height) - $input-border-width;
+
+//scss-lint:disable VendorPrefix, PseudoElement
+
+@mixin input-transition {
+  transition: border .2s ease-in-out,
+              box-shadow .2s ease-in-out;
+}
+
+@mixin input-border {
+  border-width: $input-border-width;
+  border-style: solid;
+  border-color: $input-border-color;
+}
+
+@mixin input-focus-border {
+  border-color: $input-border-color--active;
+  box-shadow: 0 0 2px 0 $input-border-color--active;
+}
+
+@mixin input-error-border {
+  border-color: $input-border-color--error;
+}
+
+@mixin input-error-focus-border {
+  border-color: $input-border-color--error;
+  box-shadow: 0 0 2px 0 $input-border-color--error;
+}
+
+
+.c-label {
+  display: block;
+  margin-bottom: rem-calc(quarter($global-spacing-unit));
+  font-size: rem-calc($global-font-size);
+  line-height: $global-line-height;
+}
+
+.c-input {
+  @include input-transition;
+  @include input-border;
+
+  width: 100%;
+  margin: 0;
+  padding: rem-calc($input-vertical-padding $input-horizontal-padding);
+
+  font-size: rem-calc($global-font-size);
+  line-height: $global-line-height;
+
+  color: $input-color;
+  background: $input-bg;
+
+  border-radius: $input-border-radius;
+  outline: none;
+  resize: vertical;
+
+  box-sizing: border-box;
+  appearance: none;
+
+  // letter-spacing: -.5px;
+
+  &:focus {
+    @include input-focus-border;
+  }
+
+  &:invalid {
+    @include input-error-border;
+
+    &:focus {
+      @include input-error-focus-border;
+    }
+  }
+}
+
+.c-input--small {
+  padding: rem-calc($input-vertical-padding--small $input-horizontal-padding);
+}
+
+.c-input--large {
+  padding: rem-calc($input-vertical-padding--large $input-horizontal-padding);
+}
+
+.c-input[disabled] {
+  color: $input-color--disabled;
+  background-color: $input-bg--disabled;
+  cursor: not-allowed;
+}
+
+.c-input[readonly] {
+  color: $input-color--disabled;
+  background-color: $input-bg--disabled;
+}
+
+.c-select {
+  @include input-transition;
+
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  padding: rem-calc($input-vertical-padding $input-horizontal-padding);
+
+  font-size: rem-calc($global-font-size);
+  line-height: $global-line-height;
+
+  color: $input-color;
+  border: $input-border-width solid $input-border-color;
+  background: $input-bg;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAYAAAC8/X7cAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADQSURBVFiF1c+7ccMwFEXBZS0oUqGgzE2+WqzE9li2KOIrkncGAZDg7BIRF3w45/ICJ0XklNJt+b6dDJFTSjdYfr+eBPETzx8Ah0c8xPMEwGER/+JZAXA4xNN4XgA4DGI1ng0AuyNexlMAYDfEZjyFAN6OKIqnAsDbEMXxVAKYjqiKpwHANER1PI0AhiOa4ukAMAzRHE8ngG5EVzwDADQjuuMZBKAaMSSegQCKEcPiGQxgEzE0ngkAVhHD46cuIi4R8fl1rnv3NC0ickTkmX/cAeicgKu/i7a4AAAAAElFTkSuQmCC");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px 6px;
+
+  border-radius: $input-border-radius;
+  outline: none;
+
+  box-sizing: border-box;
+  appearance: none;
+
+  &:focus {
+    @include input-focus-border;
+  }
+
+  &:invalid {
+    @include input-error-border;
+
+    &:focus {
+      @include input-error-focus-border;
+    }
+  }
+}
+
+.c-select--small {
+  padding: rem-calc($input-vertical-padding--small $input-horizontal-padding);
+}
+
+.c-select--large {
+  padding: rem-calc($input-vertical-padding--large $input-horizontal-padding);
+}
+
+.c-select[disabled] {
+  color: $input-color--disabled;
+  background-color: $input-bg--disabled;
+  cursor: not-allowed;
+}
+
+.c-select[readonly] {
+  color: $input-color--disabled;
+  background-color: $input-bg--disabled;
+}
+
+// components style
+.c-checkbox,
+.c-radio {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+}
+
+// INFO: I am explicit selecting :checked and :not(checked) for this reason:
+// For Browser not supporting :checked my ruleset won't apply,
+// so the native input will be displayed.
+
+.c-checkbox__input:checked,
+.c-checkbox__input:not(checked),
+.c-radio__input:checked,
+.c-radio__input:not(checked) {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  opacity: 0;
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.c-checkbox__input:checked + .c-checkbox__label,
+.c-checkbox__input:not(checked) + .c-checkbox__label,
+.c-radio__input:checked + .c-radio__label,
+.c-radio__input:not(checked)+ .c-radio__label {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: rem-calc($global-spacing-unit);
+  padding-right: rem-calc(halve($global-spacing-unit));
+}
+
+.c-checkbox__input:not(checked) + .c-checkbox__label:before,
+.c-radio__input:not(checked) + .c-radio__label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1px;
+
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+
+  border-radius: $input-border-radius;
+  border: 1px solid $input-border-color;
+
+  background: $checkradio-bg;
+
+  transition: all .2s ease-out;
+}
+
+.c-radio__input:not(checked) + .c-radio__label:before {
+  border-radius: 50%;
+}
+
+.c-checkbox__input:checked + .c-checkbox__label:before {
+  vertical-align: middle;
+  content: "✓";
+  font-size: 12px;
+  line-height: 16px;
+  text-indent: 1px;
+  color: $checkradio-bg;
+  background: $input-border-color--active;
+  text-align: center;
+}
+
+.c-radio__input:checked + .c-radio__label:before {
+  background: $checkradio-bg;
+  border-color: $input-border-color--active;
+  box-shadow: inset 0 0 0 4px $input-border-color--active;
+}
+
+.c-checkbox:hover .c-checkbox__label:before,
+.c-radio:hover .c-radio__label:before {
+  border: 1px solid $input-border-color--active;
+}
+
+.c-checkbox__input[disabled] + .c-checkbox__label,
+.c-radio__input[disabled] + .c-radio__label {
+  color: $input-color--disabled;
+  cursor: not-allowed;
+}
+
+.c-checkbox__input[disabled] + .c-checkbox__label:before,
+.c-radio__input[disabled] + .c-radio__label:before {
+  background-color: $checkradio-bg--disabled;
+  border-color: $input-border-color;
+  cursor: not-allowed;
+}
+
+.c-radio__input[disabled]:checked + .c-radio__label:before {
+  background: $checkradio-bg;
+  box-shadow: inset 0 0 0 4px $checkradio-bg--disabled;
+}
+
+.c-checkbox:hover .c-checkbox__input[disabled] + .c-checkbox__label:before,
+.c-radio:hover .c-radio__input[disabled] + .c-radio__label:before {
+  border: 1px solid $input-border-color;
+}
+
+
+::-webkit-input-placeholder {
+  font-family: $global-font-family;
+
+  letter-spacing: 0;
+
+  color: $color-ash;
+}
+
+// Firefox 18-
+:-moz-placeholder {
+  font-family: $global-font-family;
+
+  color: $input-color--disabled;
+}
+
+// Firefox 19+
+::-moz-placeholder {
+  font-family: $global-font-family;
+
+  color: $input-color--disabled;
+}
+
+:-ms-input-placeholder {
+  font-family: $global-font-family;
+
+  color: $input-color--disabled;
+}
+
+::-webkit-file-upload-button {
+  font: inherit;
+
+  -webkit-appearance: button;
+}
+
+//scss-lint:enable VendorPrefix, PseudoElement

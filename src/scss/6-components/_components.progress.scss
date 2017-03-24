@@ -1,0 +1,38 @@
+// ==========================================================================
+// Progress Bar
+// ==========================================================================
+
+// Here we set a variable assuming that default and module settings
+// are not set globally. If they have been previously been defined,
+// the following variable will be overriden and will be set to `true`.
+$imported-global-settings: false !default;
+
+@if ($imported-global-settings == false) {
+  @warn "Oops! Have you included a global settings files?";
+}
+
+$progress-height:         6px !default;
+$progress-radius:         $global-border-radius !default;
+$progress-bg:             $color-sand--dark !default;
+$progress-bar-bg:         $color-red !default;
+$progress-bar-color:      $color-white !default;
+
+
+.c-progress {
+  position: relative;
+  height: rem-calc($progress-height);
+  border-radius: $progress-radius;
+  overflow: hidden;
+  background-color: $progress-bg;
+}
+
+.c-progress__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: $progress-bar-bg;
+  color: $progress-bar-color;
+  z-index: z("default");
+  transition: width .3s linear;
+}

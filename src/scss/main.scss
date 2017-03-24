@@ -91,6 +91,8 @@
 
 @import "1-settings/settings.debugger";
 
+@import "1-settings/settings.colors";
+
 
 
 
@@ -328,13 +330,13 @@
 
 // $btn-height:                    36px;
 // $btn-height--small:             30px;
-// $btn-height--large:             42px;
+$btn-height--large:             42px;
 
 // $enable-btn--small:             true;
 // $enable-btn--large:             true;
 
 // $enable-btn--pill:              true;
-// $enable-btn--block:             true;
+$enable-btn--block:             true;
 
 // $enable-btn--ghost:             true;
 
@@ -346,7 +348,7 @@
 // $btn-primary-bg-color--active:  #206899;
 // $btn-primary-border-color:      #206899;
 // $btn-primary-text-color:        #fff;
-// $enable-btn--primary:           true;
+$enable-btn--primary:           true;
 
 // $btn-success-bg-color:          #87cc62;
 // $btn-success-bg-color--hover:   #74b94e;
@@ -363,7 +365,11 @@
 // $enable-btn--warning:           true;
 
 @import "6-components/components.example-buttons";
-@import "components/components.panel";
+@import "6-components/components.panel";
+@import "6-components/components.alert";
+@import "6-components/components.quote";
+@import "6-components/components.progress";
+@import "6-components/components.forms";
 
 
 
@@ -420,3 +426,5 @@
 
 // 10
 // @import "7-utilities/utilities.print";
+
+@import "7-utilities/utilities.text";
