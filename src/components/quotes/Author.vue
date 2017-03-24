@@ -14,7 +14,7 @@
   export default {
     data() {
       return {
-        title: 'Your Awesome Quote',
+        title: 'Your Author',
       };
     },
   };
