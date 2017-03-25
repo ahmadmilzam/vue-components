@@ -6,7 +6,7 @@
         <div class="c-panel__body">
           <form action="#" method="post" class="o-layout" @submit="getQuote">
             <div class="o-layout__item u-margin-bottom--small">
-              <textarea ref="quoteInput" name="quote" class="c-input" rows="6"></textarea>
+              <textarea v-model="quote" ref="quoteInput" name="quote" class="c-input" rows="6"></textarea>
             </div>
             <div class="o-layout__item u-margin-bottom--small">
               <button type="submit" class="c-btn c-btn--primary c-btn--large c-btn--block">Submit</button>
@@ -34,6 +34,7 @@
       return {
         title: 'Enter Your Quote',
         maxQuotes: 12,
+        quote: '',
         quotesArr: [],
       };
     },
@@ -62,10 +63,10 @@
       },
       getQuote(e) {
         e.preventDefault();
-        const quote = this.$refs.quoteInput.value;
-        if (quote && (this.quotesArr.length < this.maxQuotes)) {
-          this.quotesArr.push({ text: quote });
-          this.$refs.quoteInput.value = '';
+        const inputQuote = this.quote;
+        if (inputQuote && (this.quotesArr.length < this.maxQuotes)) {
+          this.quotesArr.push({ text: inputQuote });
+          this.quote = '';
         }
       },
     },
