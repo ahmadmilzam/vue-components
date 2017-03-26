@@ -26,10 +26,9 @@ $input-height--small:           30px !default;
 $input-height--large:           42px !default;
 $input-horizontal-padding:      halve($global-spacing-unit) !default;
 
+$checkradio-size:               18px;
 $checkradio-bg:                 $color-white !default;
 $checkradio-bg--disabled:       $color-ash !default;
-
-$textarea-height:               $global-spacing-unit * 4 !default;
 
 // private variables
 $input-vertical-padding:        halve($input-height - $global-line-height) - $input-border-width;
@@ -226,11 +225,11 @@ $input-vertical-padding--large: halve($input-height--large - $global-line-height
   content: "";
   position: absolute;
   left: 0;
-  top: 1px;
+  top: rem-calc(halve($global-line-height - $checkradio-size));
 
   display: inline-block;
-  height: 16px;
-  width: 16px;
+  height: rem-calc($checkradio-size);
+  width: rem-calc($checkradio-size);
   vertical-align: middle;
 
   border-radius: $input-border-radius;
@@ -248,8 +247,8 @@ $input-vertical-padding--large: halve($input-height--large - $global-line-height
 .c-checkbox__input:checked + .c-checkbox__label:before {
   vertical-align: middle;
   content: "✓";
-  font-size: 12px;
-  line-height: 16px;
+  font-size: rem-calc($global-font-size - 2);
+  line-height: rem-calc($checkradio-size);
   text-indent: 1px;
   color: $checkradio-bg;
   background: $input-border-color--active;
