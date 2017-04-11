@@ -1,13 +1,21 @@
 <template>
-  <div class="c-alert">
-    <button type="button" class="c-alert__close" @click="closeAlert">&times;</button>
-    <slot></slot>
-  </div>
+  <transition name="alert">
+    <div class="c-alert">
+      <button type="button" class="c-alert__close" @click="closeAlert">&times;</button>
+      <slot></slot>
+    </div>
+  </transition>
 </template>
 <script>
   import WhichTransition from '../../helpers/WhichTransition';
 
   export default {
+    props: {
+      show: {
+        type: Boolean,
+        required: true,
+      },
+    },
     methods: {
       closeAlert(e) {
         e.preventDefault();

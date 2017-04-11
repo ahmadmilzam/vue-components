@@ -2,36 +2,42 @@
   <div id="app-container" class="o-wrapper u-padding-top u-padding-bottom" style="background-color: #f5f5f5;">
     <div class="o-layout">
       <div class="o-layout__item">
-        <h2>{{ title }}</h2>
-        <ul v-if="fruits.length">
-          <li v-for="fruit in filteredFruits">{{ fruit }}</li>
-        </ul>
-        <input type="text" class="c-input" name="fruit-filter" v-model="filterText">
+        <h1>{{ title }}</h1>
+        <hr>
+        <h2>Animate Single Element</h2>
+        <button class="c-btn c-btn--primary" type="button" @click="toggleAlert">Toggle Alert</button>
+        <br>
+        <br>
+        <transition name="alert">
+          <div v-if="showAlert === true" class="c-alert">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+        </transition>
       </div>
     </div>
-    <hr>
-    <filter-list></filter-list>
   </div>
 </template>
 
 <script>
-  import { FruitsList, Title1 } from './mixins/FruitListMixin';
-  import FilterList from './components/filterlist/List.vue';
+  // import Alert from './components/alerts/Alert.vue';
 
   export default {
-    mixins: [FruitsList],
     data() {
       return {
-        title: Title1,
+        title: 'Transition and Animation',
+        showAlert: false,
       };
     },
-    filters: {
-      toUppercaseWord(str) {
-        return str.toUpperCase();
+    // components: {
+    //   alert: Alert,
+    // },
+    methods: {
+      toggleAlert() {
+        this.showAlert = !this.showAlert;
       },
-    },
-    components: {
-      filterList: FilterList,
     },
   };
 </script>
