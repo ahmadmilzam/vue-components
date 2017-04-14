@@ -1,0 +1,27 @@
+// ==========================================================================
+// Transitions and Animations
+// ==========================================================================
+
+// Here we set a variable assuming that default and module settings
+// are not set globally. If they have been previously been defined,
+// the following variable will be overriden and will be set to `true`.
+
+$imported-global-settings: false !default;
+
+@if ($imported-global-settings == false) {
+  @warn "Oops! Have you included global settings files?";
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.fade-enter-active {
+  transition: all .2s ease-out;
+}
+
+.fade-leave-active {
+  transition: all .3s ease-out;
+}

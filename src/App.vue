@@ -5,7 +5,9 @@
     <div class="o-wrapper u-padding-top u-padding-bottom">
       <div class="o-layout">
         <div class="o-layout__item">
-          <router-view></router-view>
+          <transition name="fade" mode="out-in">
+            <router-view></router-view>
+          </transition>
         </div>
       </div>
     </div>
