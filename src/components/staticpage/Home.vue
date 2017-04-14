@@ -14,5 +14,8 @@
         title: 'Home',
       };
     },
+    created() {
+      window.document.title = this.title;
+    },
   };
 </script>

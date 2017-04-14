@@ -14,5 +14,8 @@
         title: 'Contact',
       };
     },
+    created() {
+      window.document.title = this.title;
+    },
   };
 </script>

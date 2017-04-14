@@ -6,6 +6,7 @@
         <router-link class="c-navbar__link" to="/" exact active-class="is-active">Home</router-link>
         <router-link class="c-navbar__link" to="/about" active-class="is-active">About</router-link>
         <router-link class="c-navbar__link" to="/contact" active-class="is-active">Contact</router-link>
+        <router-link class="c-navbar__link" to="/news" active-class="is-active">News</router-link>
       </nav>
     </div>
   </div>

@@ -14,5 +14,8 @@
         title: 'About',
       };
     },
+    created() {
+      window.document.title = this.title;
+    },
   };
 </script>
