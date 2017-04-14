@@ -1,9 +1,29 @@
-import Home from './components/staticpage/Home.vue';
-import About from './components/staticpage/About.vue';
-import Contact from './components/staticpage/Contact.vue';
-import NewsList from './components/news/List.vue';
-import NewsDetail from './components/news/Detail.vue';
-import NewsEdit from './components/news/Edit.vue';
+/* eslint-disable global-require */
+
+const Home = (resolve) => {
+  require.ensure([], () => resolve(require('./components/staticpage/Home.vue')), 'home');
+};
+
+const About = (resolve) => {
+  require.ensure([], () => resolve(require('./components/staticpage/About.vue')), 'about');
+};
+
+const Contact = (resolve) => {
+  require.ensure([], () => resolve(require('./components/staticpage/Contact.vue')), 'contact');
+};
+
+const NewsList = (resolve) => {
+  require.ensure([], () => resolve(require('./components/news/List.vue')), 'news-group');
+};
+
+const NewsDetail = (resolve) => {
+  require.ensure([], () => resolve(require('./components/news/Detail.vue')), 'news-group');
+};
+
+const NewsEdit = (resolve) => {
+  require.ensure([], () => resolve(require('./components/news/Edit.vue')), 'news-group');
+};
+
 
 function forceIDToNumber(route) {
   return {

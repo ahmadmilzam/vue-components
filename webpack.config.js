@@ -7,11 +7,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
+const CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 
 // const ChunkHashReplacePlugin = require('chunkhash-replace-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
-  filename: 'bundle.[contenthash].css',
+  filename: 'css/bundle.[contenthash].css',
   disable: ENV === 'development'
 });
 
@@ -23,7 +24,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: 'bundle.[name].[hash].js',
+    filename: 'js/bundle.[name].[hash].js',
     pathinfo: ENV === 'development',
   },
   context: path.resolve(__dirname, 'src'),
@@ -107,6 +108,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html'
     }),
+    new CleanObsoleteChunks(),
     // isTest ? undefined : new webpack.optimize.CommonsChunkPlugin({
     //   name: 'vendor'
     // }),
