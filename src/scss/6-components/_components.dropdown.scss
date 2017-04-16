@@ -1,0 +1,35 @@
+// ==========================================================================
+// Dropdown
+// ==========================================================================
+
+// Here we set a variable assuming that default and module settings
+// are not set globally. If they have been previously been defined,
+// the following variable will be overriden and will be set to `true`.
+
+$imported-global-settings: false !default;
+
+@if ($imported-global-settings == false) {
+  @warn "Oops! Have you included global settings files?";
+}
+
+.c-dropdown {
+  position: relative;
+}
+
+.c-dropdown__content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: auto;
+
+  .c-dropdown--right & {
+    left: auto;
+    right: 0;
+  }
+}
+
+.c-dropdown__caret {
+  @include triangle(bottom, $color-black, rem-calc(5px));
+  display: inline-block;
+  vertical-align: middle;
+}

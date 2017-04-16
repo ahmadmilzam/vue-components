@@ -4,6 +4,14 @@ const Home = (resolve) => {
   require.ensure([], () => resolve(require('./components/staticpage/Home.vue')), 'home');
 };
 
+const PortfolioList = (resolve) => {
+  require.ensure([], () => resolve(require('./components/portfolio/List.vue')), 'portfolio');
+};
+
+const StockList = (resolve) => {
+  require.ensure([], () => resolve(require('./components/stock/List.vue')), 'stock');
+};
+
 const About = (resolve) => {
   require.ensure([], () => resolve(require('./components/staticpage/About.vue')), 'about');
 };
@@ -12,30 +20,27 @@ const Contact = (resolve) => {
   require.ensure([], () => resolve(require('./components/staticpage/Contact.vue')), 'contact');
 };
 
-const NewsList = (resolve) => {
-  require.ensure([], () => resolve(require('./components/news/List.vue')), 'news-group');
-};
-
-const NewsDetail = (resolve) => {
-  require.ensure([], () => resolve(require('./components/news/Detail.vue')), 'news-group');
-};
-
-const NewsEdit = (resolve) => {
-  require.ensure([], () => resolve(require('./components/news/Edit.vue')), 'news-group');
-};
-
-
-function forceIDToNumber(route) {
-  return {
-    id: parseInt(route.params.id, 10),
-  };
-}
+// function forceIDToNumber(route) {
+//   return {
+//     id: parseInt(route.params.id, 10),
+//   };
+// }
 
 export default [
   {
     path: '/',
     name: 'homeURL',
     component: Home,
+  },
+  {
+    path: '/portfolio',
+    name: 'portfolioURL',
+    component: PortfolioList,
+  },
+  {
+    path: '/stock',
+    name: 'stockURL',
+    component: StockList,
   },
   {
     path: '/about',
@@ -47,24 +52,19 @@ export default [
     name: 'contactURL',
     component: Contact,
   },
-  {
-    path: '/news',
-    name: 'newsURL',
-    component: NewsList,
-  },
-  {
-    path: '/news/:id(\\d+)',
-    name: 'newsDetailURL',
-    component: NewsDetail,
-    props: forceIDToNumber,
-    children: [
-      {
-        path: 'edit',
-        name: 'newsEditURL',
-        component: NewsEdit,
-      },
-    ],
-  },
+  // {
+  //   path: '/news/:id(\\d+)',
+  //   name: 'newsDetailURL',
+  //   component: NewsDetail,
+  //   props: forceIDToNumber,
+  //   children: [
+  //     {
+  //       path: 'edit',
+  //       name: 'newsEditURL',
+  //       component: NewsEdit,
+  //     },
+  //   ],
+  // },
   {
     path: '*',
     redirect: {

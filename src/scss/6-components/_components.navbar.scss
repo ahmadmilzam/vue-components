@@ -13,6 +13,7 @@ $imported-global-settings: false !default;
 }
 
 $navbar-height: 50px !default;
+$navbar-bg: $color-white !default;
 $navbar-title-font-size: 20px !default;
 
 .c-navbar {
@@ -20,6 +21,7 @@ $navbar-title-font-size: 20px !default;
   display: block;
   height: rem-calc($navbar-height);
 
+  background-color: $navbar-bg;
   box-shadow: 0 1px 2px $color-ash--light;
 }
 

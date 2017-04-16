@@ -12,6 +12,7 @@
 // BEFORE IMPORT THE RELEVANT FILES AND EDIT THE VALUE HERE.
 //
 
+@import "1-settings/settings.colors";
 
 //
 // Settings - global
@@ -23,6 +24,7 @@
 // above. Feel free to use these variables throughout your project, but do not
 // modify or reassign them.
 //
+$global-background-color: $color-sand;
 @import "1-settings/settings.global";
 
 
@@ -42,7 +44,6 @@
 // ==========================================================================
 //
 @import "1-settings/settings.debugger";
-@import "1-settings/settings.colors";
 
 
 
@@ -63,6 +64,7 @@
 @import "2-tools/tools.commoncss";
 @import "2-tools/tools.timming-functions";
 @import "2-tools/tools.z-index";
+@import "2-tools/tools.triangle";
 
 
 
@@ -136,6 +138,7 @@ $enable-btn--success:           true;
 @import "6-components/components.forms";
 @import "6-components/components.list-ui";
 @import "6-components/components.navbar";
+@import "6-components/components.dropdown";
 
 
 
