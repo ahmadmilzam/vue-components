@@ -4,14 +4,14 @@
       <button
         @click="decrement"
         type="button"
-        class="c-btn c-btn--primary">Decrease</button>
+        class="c-btn c-btn--primary">Decrease (2nd)</button>
       <button
         @click="increment"
         type="button"
-        class="c-btn c-btn--primary">Increase</button>
+        class="c-btn c-btn--primary">Increase (2nd)</button>
       <button
-        @click="sayBye"
-        class="c-btn" type="button">Say Goodbye!</button>
+        @click="sayHello"
+        class="c-btn" type="button">Say Hello!</button>
     </div>
   </div>
 </template>
@@ -25,8 +25,8 @@
         'increment',
         'decrement',
       ]),
-      sayBye() {
-        alert('Bye there :(');
+      sayHello() {
+        alert('hello there');
       },
     },
   };

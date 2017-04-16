@@ -1,7 +1,7 @@
 import Vue from 'vue';
 // import VueRouter from 'vue-router';
 
-import counterStore from './store/counter';
+import CentralStore from './store/index';
 import App from './App.vue';
 // import routes from './routes';
 import './scss/main.scss';
@@ -28,7 +28,7 @@ import './scss/main.scss';
 
 window.app = new Vue({
   // router,
-  store: counterStore,
+  store: CentralStore,
   el: '#app',
   render: createElement => createElement(App),
 });
