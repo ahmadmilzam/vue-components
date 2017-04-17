@@ -36,6 +36,9 @@ node_modules/
 dist/
 build/
 
+# Tmp folder
+tmp/
+
 # Optional npm cache directory
 .npm
 
