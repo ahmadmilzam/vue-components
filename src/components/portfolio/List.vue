@@ -7,7 +7,7 @@
           <stock-item :item="stock"></stock-item>
         </div>
       </div>
-      <alert type="error" v-else>
+      <alert type="error" :show="stocks.length === 0">
         <p>You have no portfolio yet, go by one!</p>
       </alert>
     </div>

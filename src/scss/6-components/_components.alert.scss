@@ -38,14 +38,8 @@ $alert-error-color:           $color-pink !default;
   border-style: solid;
   border-color: $alert-default-border-color;
 
-  transition: opacity .3s ease-out;
-
   > :last-child {
     margin-bottom: 0;
-  }
-
-  &.is-hiding {
-    opacity: 0;
   }
 
   &.c-alert--error {
@@ -95,24 +89,14 @@ $alert-error-color:           $color-pink !default;
   animation-name: shake;
 }
 
-// .alert-enter-to {
-//   opacity: 0;
-// }
-
-// .alert-leave {
-
-// }
-
-.alert-leave-active {
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-name: bounceOutUp;
+.alert-leave-to {
+  opacity: 0;
+  visibility: hidden;
 }
 
-// .alert-leave-to {
-//   transform: translateX(10px);
-//   opacity: 0;
-// }
+.alert-leave-active {
+  transition: all .3s ease-out;
+}
 
 @keyframes shake {
   from,
@@ -129,25 +113,5 @@ $alert-error-color:           $color-pink !default;
   20%, 40%, 60%, 80% {
     -webkit-transform: translate3d(10px, 0, 0);
     transform: translate3d(10px, 0, 0);
-  }
-}
-
-
-@keyframes bounceOutUp {
-  20% {
-    -webkit-transform: translate3d(0, -10px, 0);
-    transform: translate3d(0, -10px, 0);
-  }
-
-  40%, 45% {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 20px, 0);
-    transform: translate3d(0, 20px, 0);
-  }
-
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -2000px, 0);
-    transform: translate3d(0, -2000px, 0);
   }
 }
