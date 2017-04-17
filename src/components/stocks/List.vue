@@ -7,9 +7,6 @@
           <stock-item :item="stock"></stock-item>
         </div>
       </div>
-      <alert type="error" v-else>
-        <p>You have no portfolio yet, go by one!</p>
-      </alert>
     </div>
   </div>
 </template>
@@ -17,7 +14,6 @@
 <script>
   import { mapGetters, mapActions } from 'vuex';
   import StockItem from './Detail.vue';
-  import Alert from '../alerts/Alert.vue';
 
   export default {
     data() {
@@ -26,21 +22,21 @@
       };
     },
     methods: {
-      ...mapActions('portfolio', [
-        'sellStock',
+      ...mapActions('stocks', [
+        'initStocks',
       ]),
     },
     computed: {
-      ...mapGetters('portfolio', [
+      ...mapGetters('stocks', [
         'stocks',
       ]),
     },
     components: {
       StockItem,
-      Alert,
     },
     created() {
       window.document.title = this.title;
+      this.initStocks();
     },
   };
 </script>

@@ -12,7 +12,11 @@ $imported-global-settings: false !default;
   @warn "Oops! Have you included global settings files?";
 }
 
-$navbar-height: 50px !default;
+$navbar-height: 60px !default;
+$navbar-btn-height: $btn-height !default;
+$navbar-padding: $global-spacing-unit--small !default;
+$navbar-link-padding: halve($navbar-height - $global-spacing-unit);
+$navbar-btn-padding: halve($navbar-height - $navbar-btn-height);
 $navbar-bg: $color-white !default;
 $navbar-title-font-size: 20px !default;
 
@@ -20,9 +24,20 @@ $navbar-title-font-size: 20px !default;
   @include clearfix;
   display: block;
   height: rem-calc($navbar-height);
-
   background-color: $navbar-bg;
   box-shadow: 0 1px 2px $color-ash--light;
+}
+
+.c-navbar__left {
+  float: left;
+  margin-left: -#{rem-calc($navbar-padding)};
+  margin-right: -#{rem-calc($navbar-padding)};
+}
+
+.c-navbar__right {
+  float: right;
+  margin-left: -#{rem-calc($navbar-padding)};
+  margin-right: -#{rem-calc($navbar-padding)};
 }
 
 .c-navbar__title {
@@ -30,6 +45,8 @@ $navbar-title-font-size: 20px !default;
   float: left;
   font-size: rem-calc($navbar-title-font-size);
   line-height: rem-calc($navbar-height);
+  padding-left: rem-calc($navbar-padding);
+  padding-right: rem-calc($navbar-padding);
   font-weight: bold;
 
   opacity: .7;
@@ -48,6 +65,8 @@ $navbar-title-font-size: 20px !default;
 }
 
 .c-navbar__menu {
+  @include clearfix;
+
   display: block;
   float: right;
   height: rem-calc($navbar-height);
@@ -56,14 +75,34 @@ $navbar-title-font-size: 20px !default;
   padding: 0;
 }
 
-.c-navbar__link {
-  display: inline-block;
-  padding: 0 rem-calc($global-spacing-unit--tiny);
-  line-height: rem-calc($navbar-height);
+.c-navbar__item {
+  display: block;
+  float: left;
   color: $color-black;
+  background-color: $color-white;
+  transition: background-color .3s ease-out;
 
   &.is-active,
   &:hover {
-    color: $color-blue;
+    background-color: $color-sand;
   }
+}
+
+.c-navbar__text,
+ .c-navbar__link {
+  display: block;
+  padding: rem-calc($navbar-link-padding $navbar-padding);
+  line-height: rem-calc($global-line-height);
+}
+
+.c-navbar__link {
+  &,
+  &:hover,
+  &:focus {
+    color: $color-black;
+  }
+}
+
+.c-navbar__btn {
+  padding: rem-calc($navbar-btn-padding $navbar-padding);
 }

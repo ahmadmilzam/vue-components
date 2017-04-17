@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
-import CentralStore from './store/index';
-import App from './App.vue';
+import store from './store/index';
 import routes from './routes';
+import App from './App.vue';
 import './scss/main.scss';
 
 Vue.use(VueRouter);
+
+Vue.filter('currency', value => value.toLocaleString('id', { style: 'currency', currency: 'IDR' }));
 
 const router = new VueRouter({
   routes,
@@ -26,7 +27,7 @@ const router = new VueRouter({
 
 window.app = new Vue({
   router,
-  store: CentralStore,
+  store,
   el: '#app',
   render: createElement => createElement(App),
 });

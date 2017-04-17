@@ -1,7 +1,11 @@
 <template>
   <transition name="alert">
-    <div class="c-alert">
-      <button type="button" class="c-alert__close" @click="closeAlert">&times;</button>
+    <div class="c-alert" :class="{'c-alert--error': type === 'error'}">
+      <button
+        v-if="closeBtn"
+        @click="closeAlert"
+        type="button"
+        class="c-alert__close">&times;</button>
       <slot></slot>
     </div>
   </transition>
@@ -11,9 +15,13 @@
 
   export default {
     props: {
-      show: {
+      closeBtn: {
         type: Boolean,
-        required: true,
+        default: false,
+      },
+      type: {
+        type: String,
+        default: '',
       },
     },
     methods: {

@@ -4,7 +4,7 @@
       <div class="c-panel__title">
         {{ item.name }}
         <small>
-          Price: {{ item.price | currency }} | QTY: {{ item.quantity }}
+          Price: {{ item.price | currency }}
         </small>
       </div>
     </div>
@@ -23,7 +23,7 @@
         <div class="o-layout__item u-6of12">
           <button
             :disabled="quantity <= 0"
-            class="c-btn c-btn--primary c-btn--block" type="submit">Sell</button>
+            class="c-btn c-btn--primary c-btn--block" type="submit">Buy</button>
         </div>
         <div v-show="errors.has('quantity')" class="o-layout__item">
           <span class="u-text-small u-text-pink">{{ errors.first('quantity') }}</span>
@@ -61,16 +61,17 @@
             quantity: this.quantity,
           };
 
-          this.sellStock(order);
+          console.log('Buying', order);
+
+          this.buyStock(order);
           this.quantity = 0;
-          console.log('Selling', order);
         });
         // .catch(() => {
         //   alert('Correct them errors!');
         // })
       },
-      ...mapActions('portfolio', {
-        sellStock: 'sell',
+      ...mapActions('stocks', {
+        buyStock: 'buy',
       }),
     },
   };

@@ -24,8 +24,8 @@ $list-ui-border-color: $color-ash--light !default;
 .c-list-ui__item {
   position: relative;
   display: block;
-  padding: rem-calc($global-spacing-unit--small);
-  border: 1px solid $list-ui-border-color;
+  padding: rem-calc($global-spacing-unit);
+  border-bottom: 1px solid $list-ui-border-color;
   cursor: pointer;
 
   transition: background-color .3s ease-out;
@@ -36,5 +36,13 @@ $list-ui-border-color: $color-ash--light !default;
 
   &.list-ui-move {
     transition: transform .3s ease-out;
+  }
+
+  .c-list-ui--tiny & {
+    padding: rem-calc($global-spacing-unit--tiny);
+  }
+
+  .c-list-ui--small & {
+    padding: rem-calc($global-spacing-unit--small);
   }
 }

@@ -9,7 +9,7 @@ const PortfolioList = (resolve) => {
 };
 
 const StockList = (resolve) => {
-  require.ensure([], () => resolve(require('./components/stock/List.vue')), 'stock');
+  require.ensure([], () => resolve(require('./components/stocks/List.vue')), 'stock');
 };
 
 const About = (resolve) => {
