@@ -30,7 +30,8 @@
     },
     methods: {
       closeAlert() {
-        this.show = !this.show;
+        this.$emit('onClosed', false);
+        // this.show = !this.show;
         // let target = e.target;
         // let parent = target.parentNode;
         // let grandParent = parent.parentNode;

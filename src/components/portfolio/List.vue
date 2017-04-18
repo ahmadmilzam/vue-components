@@ -10,8 +10,9 @@
       <alert
         type="error"
         :closeBtn="true"
-        :show="showAlert">
-        <p>You have no portfolio yet, go by one!</p>
+        :show="showAlert"
+        @onClosed="alertClosed">
+        <p>You have no portfolio yet, buy one!</p>
       </alert>
     </div>
   </div>
@@ -26,20 +27,26 @@
     data() {
       return {
         title: 'Stocks',
+        showAlert: false,
       };
     },
     methods: {
+      alertClosed(param) {
+        this.showAlert = param;
+      },
       ...mapActions('portfolio', [
         'sellStock',
       ]),
     },
     computed: {
-      showAlert() {
-        return this.stocks.length === 0;
-      },
       ...mapGetters('portfolio', [
         'stocks',
       ]),
+    },
+    watch: {
+      stocks() {
+        this.showAlert = this.stocks.length === 0;
+      },
     },
     components: {
       StockItem,
@@ -47,6 +54,7 @@
     },
     created() {
       window.document.title = this.title;
+      this.showAlert = this.stocks.length === 0;
     },
   };
 </script>
