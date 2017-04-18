@@ -12,7 +12,6 @@ export default {
   },
   mutations: {
     set(state, stocks) {
-      console.log('setting up stocks');
       const scope = state;
       scope.stocks = stocks;
     },
@@ -20,11 +19,9 @@ export default {
   },
   actions: {
     buy({ commit }, order) {
-      console.log('stock ordered', order);
       commit('portfolio/buy', order, { root: true });
     },
     initStocks({ commit }) {
-      console.log('will commit set stocks');
       commit('set', dummy);
     },
     randomizeStocks({ commit }) {

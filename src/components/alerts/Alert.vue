@@ -29,7 +29,7 @@
       },
     },
     methods: {
-      closeAlert(e) {
+      closeAlert() {
         this.show = !this.show;
         // let target = e.target;
         // let parent = target.parentNode;

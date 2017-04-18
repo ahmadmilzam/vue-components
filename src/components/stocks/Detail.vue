@@ -22,7 +22,7 @@
         </div>
         <div class="o-layout__item u-6of12">
           <button
-            :disabled="quantity <= 0"
+            :disabled="insufficientFunds || quantity <= 0"
             class="c-btn c-btn--primary c-btn--block" type="submit">Buy</button>
         </div>
         <div v-show="errors.has('quantity')" class="o-layout__item">
@@ -36,7 +36,7 @@
 <script>
   import Vue from 'vue';
   import VeeValidate from 'vee-validate';
-  import { mapActions } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
 
   Vue.use(VeeValidate);
 
@@ -52,17 +52,22 @@
         required: true,
       },
     },
+    computed: {
+      insufficientFunds() {
+        return this.quantity * this.item.price > this.funds;
+      },
+      ...mapGetters('portfolio', [
+        'funds',
+      ]),
+    },
     methods: {
       formSubmit() {
         this.$validator.validateAll().then(() => {
           const order = {
-            stockId: this.item.id,
-            stockPrice: this.item.price,
+            id: this.item.id,
+            price: this.item.price,
             quantity: this.quantity,
           };
-
-          console.log('Buying', order);
-
           this.buyStock(order);
           this.quantity = 0;
         });

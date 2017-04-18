@@ -24,25 +24,23 @@ export default {
     },
   },
   mutations: {
-    buy(state, { stockId, quantity, stockPrice }) {
-      console.log('stock bought from portfolio');
-      const record = state.stocks.find(item => item.id === stockId);
+    buy(state, { id, quantity, price }) {
+      const record = state.stocks.find(item => item.id === id);
       const theState = state;
 
       if (record) {
         record.quantity += quantity;
       } else {
         state.stocks.push({
-          id: stockId,
+          id,
           quantity,
         });
       }
 
-      theState.funds -= stockPrice * quantity;
+      theState.funds -= price * quantity;
     },
-    sell(state, { stockId, quantity, stockPrice }) {
-      console.log('stock sold from portfolio');
-      const record = state.stocks.find(item => item.id === stockId);
+    sell(state, { id, quantity, price }) {
+      const record = state.stocks.find(item => item.id === id);
       const theState = state;
 
       if (record.quantity > quantity) {
@@ -51,7 +49,7 @@ export default {
         state.stocks.splice(state.stocks.indexOf(record), 1);
       }
 
-      theState.funds += stockPrice * quantity;
+      theState.funds += price * quantity;
     },
   },
   actions: {

@@ -7,7 +7,10 @@
           <stock-item :item="stock"></stock-item>
         </div>
       </div>
-      <alert type="error" :show="stocks.length === 0">
+      <alert
+        type="error"
+        :closeBtn="true"
+        :show="showAlert">
         <p>You have no portfolio yet, go by one!</p>
       </alert>
     </div>
@@ -31,6 +34,9 @@
       ]),
     },
     computed: {
+      showAlert() {
+        return this.stocks.length === 0;
+      },
       ...mapGetters('portfolio', [
         'stocks',
       ]),

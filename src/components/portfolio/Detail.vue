@@ -56,8 +56,8 @@
       formSubmit() {
         this.$validator.validateAll().then(() => {
           const order = {
-            stockId: this.item.id,
-            stockPrice: this.item.price,
+            id: this.item.id,
+            price: this.item.price,
             quantity: this.quantity,
           };
 
