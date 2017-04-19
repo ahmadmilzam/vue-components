@@ -16,13 +16,13 @@
             v-model.number="quantity"
             :value="quantity"
             v-validate="'required|numeric'"
-            :class="{'c-input': true, 'is-invalid': errors.has('quantity') }"
+            :class="{'c-input': true, 'is-invalid': errors.has('quantity') || insufficientQty }"
             name="quantity"
             type="number">
         </div>
         <div class="o-layout__item u-6of12">
           <button
-            :disabled="quantity <= 0"
+            :disabled="quantity <= 0 || insufficientQty"
             class="c-btn c-btn--primary c-btn--block" type="submit">Sell</button>
         </div>
         <div v-show="errors.has('quantity')" class="o-layout__item">
@@ -52,6 +52,11 @@
         required: true,
       },
     },
+    computed: {
+      insufficientQty() {
+        return this.quantity > this.item.quantity;
+      },
+    },
     methods: {
       formSubmit() {
         this.$validator.validateAll().then(() => {
@@ -63,7 +68,6 @@
 
           this.sellStock(order);
           this.quantity = 0;
-          console.log('Selling', order);
         });
         // .catch(() => {
         //   alert('Correct them errors!');

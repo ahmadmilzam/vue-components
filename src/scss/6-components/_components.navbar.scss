@@ -80,12 +80,6 @@ $navbar-title-font-size: 20px !default;
   float: left;
   color: $color-black;
   background-color: $color-white;
-  transition: background-color .3s ease-out;
-
-  &.is-active,
-  &:hover {
-    background-color: $color-sand;
-  }
 }
 
 .c-navbar__text,
@@ -96,6 +90,14 @@ $navbar-title-font-size: 20px !default;
 }
 
 .c-navbar__link {
+  transition: background-color .3s ease-out;
+
+  &:hover,
+  .is-active > &,
+  .is-open > & {
+    background-color: $color-sand;
+  }
+
   &,
   &:hover,
   &:focus {

@@ -1,11 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueResourse from 'vue-resource';
 import store from './store/index';
 import routes from './routes';
 import App from './App.vue';
 import './scss/main.scss';
 
 Vue.use(VueRouter);
+Vue.use(VueResourse);
+
+Vue.http.options.root = 'https://vue-http-a3911.firebaseio.com/';
 
 Vue.filter('currency', value => value.toLocaleString('id', { style: 'currency', currency: 'IDR' }));
 

@@ -19,21 +19,23 @@
         <ul class="c-navbar__menu">
           <li class="c-navbar__item">
             <div class="c-navbar__btn">
-              <a class="c-btn" href="#">End Day</a>
+              <a @click="randomize" class="c-btn" href="#">End Day</a>
             </div>
           </li>
-          <li class="c-navbar__item c-dropdown c-dropdown--right">
-            <a href="#" class="c-navbar__link">
+          <li
+            :class="{'is-open': showDropdown}"
+            class="c-navbar__item c-dropdown c-dropdown--right">
+            <a href="#" class="c-navbar__link c-dropdown__toggle">
               Save &amp; Load
               <span class="c-dropdown__caret"></span>
-              <div class="c-dropdown__content">
-                <ul class="c-list-ui c-list-ui--small">
-                  <li class="c-list-ui__item">Item no #1</li>
-                  <li class="c-list-ui__item">Item no #2</li>
-                  <li class="c-list-ui__item">Item no #3</li>
-                </ul>
-              </div>
             </a>
+            <div class="c-dropdown__content">
+              <ul class="c-list-ui c-list-ui--small">
+                <li class="c-list-ui__item">Item no #1</li>
+                <li class="c-list-ui__item">Item no #2</li>
+                <li class="c-list-ui__item">Item no #3</li>
+              </ul>
+            </div>
           </li>
           <li class="c-navbar__item">
             <strong class="c-navbar__text">Funds: {{ funds | currency }}</strong>
@@ -45,10 +47,14 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
+  import $ from '../../helpers/NodeList';
+
   export default {
     data() {
       return {
         title: 'Mini Vue App',
+        showDropdown: false,
       };
     },
     props: {
@@ -56,6 +62,29 @@
         type: Number,
         required: true,
       },
+    },
+    methods: {
+      toggleDropdown() {
+        this.showDropdown = !this.showDropdown;
+      },
+      ...mapActions('stocks', [
+        'randomize',
+      ]),
+    },
+    mounted() {
+      const $el = $(this.$el.querySelector('.c-dropdown'));
+      $el.onBlur(() => {
+        console.log('dropdown blur');
+        this.showDropdown = false;
+      });
+      $el.findChildren('.c-dropdown__toggle').on('click', (e) => {
+        console.log('dropdown toggle clicked');
+        e.preventDefault();
+        // if (this.disabled) { return false; }
+        this.showDropdown = !this.showDropdown;
+        return false;
+      });
+      // $el.findChildren('ul').on('click', 'li>a', e => { this.show = false })
     },
   };
 </script>

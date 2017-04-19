@@ -74,8 +74,17 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        // loader: 'babel-loader',
+        // "include" is commonly used to match the directories
+        include: [
+          path.resolve(__dirname, "src"),
+          path.resolve(__dirname, "test"),
+          // path.resolve(__dirname, "src/components"),
+          // path.resolve(__dirname, "src/mixins"),
+          // path.resolve(__dirname, "src/store"),
+        ],
+        // "exclude" should be used to exclude exceptions
+        // try to prefer "include" when possible
+        // exclude: /node_modules/,
         use: [
           "babel-loader",
           "eslint-loader",

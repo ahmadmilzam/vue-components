@@ -52,11 +52,5 @@
         // }
       },
     },
-    beforeDestroye() {
-      console.log('alert will destroyed');
-    },
-    destroyed() {
-      console.log('alert destroyed');
-    },
   };
 </script>

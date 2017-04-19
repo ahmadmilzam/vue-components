@@ -16,7 +16,7 @@
             v-model.number="quantity"
             :value="quantity"
             v-validate="'required|numeric'"
-            :class="{'c-input': true, 'is-invalid': errors.has('quantity') }"
+            :class="{'c-input': true, 'is-invalid': errors.has('quantity') || insufficientFunds }"
             name="quantity"
             type="number">
         </div>

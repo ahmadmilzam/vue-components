@@ -15,7 +15,13 @@ export default {
       const scope = state;
       scope.stocks = stocks;
     },
-    random() {},
+    randomize(state) {
+      const theState = state;
+      theState.stocks.forEach((stock) => {
+        const theStock = stock;
+        theStock.price = Math.round(stock.price * (1 + (Math.random() - 0.5)));
+      });
+    },
   },
   actions: {
     buy({ commit }, order) {
@@ -24,8 +30,8 @@ export default {
     initStocks({ commit }) {
       commit('set', dummy);
     },
-    randomizeStocks({ commit }) {
-      commit('random');
+    randomize({ commit }) {
+      commit('randomize');
     },
   },
 };

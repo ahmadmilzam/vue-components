@@ -37,7 +37,7 @@ $dropdown-content-min-width: 160px !default;
     right: 0;
   }
 
-  .is-active & {
+  .is-open > & {
     display: block;
   }
 }
