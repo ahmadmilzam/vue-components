@@ -7,11 +7,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
+const CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 
 // const ChunkHashReplacePlugin = require('chunkhash-replace-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
-  filename: 'bundle.[contenthash].css',
+  filename: 'css/bundle.[contenthash].css',
   disable: ENV === 'development'
 });
 
@@ -22,7 +23,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.[name].[hash].js',
+    publicPath: '/',
+    filename: 'js/bundle.[name].[hash].js',
     pathinfo: ENV === 'development',
   },
   context: path.resolve(__dirname, 'src'),
@@ -72,8 +74,17 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        // loader: 'babel-loader',
+        // "include" is commonly used to match the directories
+        include: [
+          path.resolve(__dirname, "src"),
+          path.resolve(__dirname, "test"),
+          // path.resolve(__dirname, "src/components"),
+          // path.resolve(__dirname, "src/mixins"),
+          // path.resolve(__dirname, "src/store"),
+        ],
+        // "exclude" should be used to exclude exceptions
+        // try to prefer "include" when possible
+        // exclude: /node_modules/,
         use: [
           "babel-loader",
           "eslint-loader",
@@ -106,6 +117,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html'
     }),
+    new CleanObsoleteChunks(),
     // isTest ? undefined : new webpack.optimize.CommonsChunkPlugin({
     //   name: 'vendor'
     // }),

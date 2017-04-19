@@ -12,32 +12,40 @@ $imported-global-settings: false !default;
 }
 
 // Setup variables
-$alert-border-radius: $global-border-radius !default;
-$alert-border-width:  1px !default;
-$alert-border-color:  $color-yellow--superdark !default;
-$alert-bg:            $color-yellow--superlight !default;
-$alert-color:         $color-yellow--superdark !default;
-$alert-close-color:   $color-black !default;
+$alert-border-radius:         $global-border-radius !default;
+$alert-border-width:          1px !default;
+
+$alert-default-close-color:   $color-black !default;
+$alert-default-border-color:  $color-yellow--superdark !default;
+$alert-default-bg:            $color-yellow--superlight !default;
+$alert-default-color:         $color-yellow--superdark !default;
+
+$alert-error-close-color:     color-level($color-pink, -2) !default;
+$alert-error-border-color:    color-level($color-pink, -2) !default;
+$alert-error-bg:              $color-pink--light !default;
+$alert-error-color:           $color-pink !default;
 
 .c-alert {
   position: relative;
   display: block;
   padding: rem-calc($global-spacing-unit--small);
 
-  background-color: $alert-bg;
-  color: $alert-color;
+  background-color: $alert-default-bg;
+  color: $alert-default-color;
 
-  border: $alert-border-width solid $alert-border-color;
   border-radius: $alert-border-radius;
-
-  transition: opacity .3s ease-out;
+  border-width: $alert-border-width;
+  border-style: solid;
+  border-color: $alert-default-border-color;
 
   > :last-child {
     margin-bottom: 0;
   }
 
-  &.is-hiding {
-    opacity: 0;
+  &.c-alert--error {
+    background-color: $alert-error-bg;
+    color: $alert-error-color;
+    border-color: $alert-error-border-color;
   }
 }
 
@@ -51,7 +59,7 @@ $alert-close-color:   $color-black !default;
   padding: 0;
   margin: 0;
   line-height: 1;
-  color: rgba($alert-close-color, .4);
+  color: rgba($alert-default-close-color, .4);
   font-size: rem-calc(18);
   cursor: pointer;
 
@@ -60,4 +68,50 @@ $alert-close-color:   $color-black !default;
   outline: 0;
   appearance: none;
   -webkit-appearance: none;
+
+  .c-alert--error & {
+    color: rgba($alert-error-close-color, .4);
+  }
+}
+
+
+//
+// Alert's animation state
+// ==========================================================================
+
+// .alert-enter {
+
+// }
+
+.alert-enter-active {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: shake;
+}
+
+.alert-leave-to {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.alert-leave-active {
+  transition: all .3s ease-out;
+}
+
+@keyframes shake {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
 }

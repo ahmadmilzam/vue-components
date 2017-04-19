@@ -1,0 +1,48 @@
+// ==========================================================================
+// List UI
+// ==========================================================================
+
+// Here we set a variable assuming that default and module settings
+// are not set globally. If they have been previously been defined,
+// the following variable will be overriden and will be set to `true`.
+
+$imported-global-settings: false !default;
+
+@if ($imported-global-settings == false) {
+  @warn "Oops! Have you included global settings files?";
+}
+
+$list-ui-border-color: $color-ash--light !default;
+
+.c-list-ui {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-list-ui__item {
+  position: relative;
+  display: block;
+  padding: rem-calc($global-spacing-unit);
+  border-bottom: 1px solid $list-ui-border-color;
+  cursor: pointer;
+
+  transition: background-color .3s ease-out;
+
+  &:hover {
+    background-color: $color-sand--dark;
+  }
+
+  &.list-ui-move {
+    transition: transform .3s ease-out;
+  }
+
+  .c-list-ui--tiny & {
+    padding: rem-calc($global-spacing-unit--tiny);
+  }
+
+  .c-list-ui--small & {
+    padding: rem-calc($global-spacing-unit--small);
+  }
+}

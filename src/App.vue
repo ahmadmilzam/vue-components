@@ -1,21 +1,26 @@
 <template>
-  <div id="app-container" class="o-wrapper u-padding-top u-padding-bottom">
-    <form-basic></form-basic>
+  <div id="app-container">
+    <navbar :funds="funds"></navbar>
+    <div class="o-wrapper u-padding-top u-padding-bottom">
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
-  import FormBasic from './components/forms/FormBasic.vue';
+  import { mapGetters } from 'vuex';
+  import Navbar from './components/layouts/Navbar.vue';
 
   export default {
-    data() {
-      return {
-        quoteTitle: 'The Quote',
-        selectedComponent: 'quote',
-      };
-    },
     components: {
-      formBasic: FormBasic,
+      Navbar,
+    },
+    computed: {
+      ...mapGetters('portfolio', [
+        'funds',
+      ]),
     },
   };
 </script>

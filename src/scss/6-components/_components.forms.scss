@@ -97,7 +97,7 @@ $input-vertical-padding--large: halve($input-height--large - $global-line-height
     @include input-focus-border;
   }
 
-  &:invalid {
+  &.is-invalid {
     @include input-error-border;
 
     &:focus {
@@ -154,7 +154,7 @@ $input-vertical-padding--large: halve($input-height--large - $global-line-height
     @include input-focus-border;
   }
 
-  &:invalid {
+  &.is-invalid {
     @include input-error-border;
 
     &:focus {

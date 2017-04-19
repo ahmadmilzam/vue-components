@@ -1,0 +1,110 @@
+// ==========================================================================
+// Navbar
+// ==========================================================================
+
+// Here we set a variable assuming that default and module settings
+// are not set globally. If they have been previously been defined,
+// the following variable will be overriden and will be set to `true`.
+
+$imported-global-settings: false !default;
+
+@if ($imported-global-settings == false) {
+  @warn "Oops! Have you included global settings files?";
+}
+
+$navbar-height: 60px !default;
+$navbar-btn-height: $btn-height !default;
+$navbar-padding: $global-spacing-unit--small !default;
+$navbar-link-padding: halve($navbar-height - $global-spacing-unit);
+$navbar-btn-padding: halve($navbar-height - $navbar-btn-height);
+$navbar-bg: $color-white !default;
+$navbar-title-font-size: 20px !default;
+
+.c-navbar {
+  @include clearfix;
+  display: block;
+  height: rem-calc($navbar-height);
+  background-color: $navbar-bg;
+  box-shadow: 0 1px 2px $color-ash--light;
+}
+
+.c-navbar__left {
+  float: left;
+  margin-left: -#{rem-calc($navbar-padding)};
+  margin-right: -#{rem-calc($navbar-padding)};
+}
+
+.c-navbar__right {
+  float: right;
+  margin-left: -#{rem-calc($navbar-padding)};
+  margin-right: -#{rem-calc($navbar-padding)};
+}
+
+.c-navbar__title {
+  display: block;
+  float: left;
+  font-size: rem-calc($navbar-title-font-size);
+  line-height: rem-calc($navbar-height);
+  padding-left: rem-calc($navbar-padding);
+  padding-right: rem-calc($navbar-padding);
+  font-weight: bold;
+
+  opacity: .7;
+  text-decoration: none;
+
+  transition: opacity .3s ease-out;
+
+  &,
+  &:hover {
+    color: $color-black;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.c-navbar__menu {
+  @include clearfix;
+
+  display: block;
+  float: right;
+  height: rem-calc($navbar-height);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c-navbar__item {
+  display: block;
+  float: left;
+  color: $color-black;
+  background-color: $color-white;
+}
+
+.c-navbar__text,
+ .c-navbar__link {
+  display: block;
+  padding: rem-calc($navbar-link-padding $navbar-padding);
+  line-height: rem-calc($global-line-height);
+}
+
+.c-navbar__link {
+  transition: background-color .3s ease-out;
+
+  &:hover,
+  .is-active > &,
+  .is-open > & {
+    background-color: $color-sand;
+  }
+
+  &,
+  &:hover,
+  &:focus {
+    color: $color-black;
+  }
+}
+
+.c-navbar__btn {
+  padding: rem-calc($navbar-btn-padding $navbar-padding);
+}

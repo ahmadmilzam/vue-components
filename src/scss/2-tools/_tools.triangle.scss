@@ -1,0 +1,68 @@
+// ==========================================================================
+// Triangle Helper
+// ==========================================================================
+/// @param {Direction} $direction - Triangle direction, either `top`, `right`, `bottom` or `left`
+/// @param {Color} $color [currentcolor] - Triangle color
+/// @param {Length} $size [1em] - Triangle size
+//
+// Here we set a variable assuming that default and module settings
+// are not set globally. If they have been previously been defined,
+// the following variable will be overriden and will be set to `true`.
+
+$imported-global-settings: false !default;
+
+@if ($imported-global-settings == false) {
+  @warn "Oops! Have you included global settings files?";
+}
+
+@function check-pos($direction) {
+  @if ($direction == top or $direction == "top") {
+    @return bottom;
+  }
+  @else if ($direction == bottom or $direction == "bottom") {
+    @return top;
+  }
+  @else if ($direction == left or $direction == "left") {
+    @return right;
+  }
+  @else if ($direction == right or $direction == "right") {
+    @return left;
+  }
+}
+
+@function opposite-position($direction) {
+  $max: length($direction);
+
+  @if $max == 1 {
+    @return check-pos(nth($direction, 1));
+  }
+
+  $opposite-direction: ();
+
+  @for $i from 1 through $max {
+    $opposite-direction: append($opposite-direction, check-pos(nth($direction, $i)));
+  }
+
+  @return $opposite-direction;
+}
+
+@mixin triangle($direction, $color: currentcolor, $size: 1rem) {
+  @if not index(top right bottom left, $direction) {
+    @error "Direction must be either `top`, `right`, `bottom` or `left`.";
+  }
+
+  width: 0;
+  height: 0;
+  border-#{opposite-position($direction)}: ($size * 1.5) solid $color;
+
+  $perpendicular-borders: $size solid transparent;
+
+  @if $direction == top or $direction == bottom {
+    border-left: $perpendicular-borders;
+    border-right: $perpendicular-borders;
+  }
+  @else if $direction == right or $direction == left {
+    border-bottom: $perpendicular-borders;
+    border-top: $perpendicular-borders;
+  }
+}

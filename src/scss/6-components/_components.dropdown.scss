@@ -1,0 +1,49 @@
+// ==========================================================================
+// Dropdown
+// ==========================================================================
+
+// Here we set a variable assuming that default and module settings
+// are not set globally. If they have been previously been defined,
+// the following variable will be overriden and will be set to `true`.
+
+$imported-global-settings: false !default;
+
+@if ($imported-global-settings == false) {
+  @warn "Oops! Have you included global settings files?";
+}
+
+$dropdown-content-min-width: 160px !default;
+
+.c-dropdown {
+  position: relative;
+  line-height: rem-calc($global-line-height);
+}
+
+.c-dropdown__content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: auto;
+  z-index: z("default");
+  display: none;
+
+  min-width: rem-calc($dropdown-content-min-width);
+
+  background-color: $color-white;
+  box-shadow: 0 1px 2px transparentize($color-black, .95);
+
+  .c-dropdown--right & {
+    left: auto;
+    right: 0;
+  }
+
+  .is-open > & {
+    display: block;
+  }
+}
+
+.c-dropdown__caret {
+  @include triangle(bottom, $color-black, rem-calc(5px));
+  display: inline-block;
+  vertical-align: middle;
+}
