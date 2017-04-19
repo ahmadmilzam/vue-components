@@ -31,9 +31,12 @@
             </a>
             <div class="c-dropdown__content">
               <ul class="c-list-ui c-list-ui--small">
-                <li class="c-list-ui__item">Item no #1</li>
-                <li class="c-list-ui__item">Item no #2</li>
-                <li class="c-list-ui__item">Item no #3</li>
+                <li @click="saveData" class="c-list-ui__item">
+                  Save Data
+                </li>
+                <li @click="loadData" class="c-list-ui__item">
+                  Load Data
+                </li>
               </ul>
             </div>
           </li>
@@ -67,6 +70,24 @@
       toggleDropdown() {
         this.showDropdown = !this.showDropdown;
       },
+      saveData() {
+        const data = {
+          funds: this.$store.getters['portfolio/funds'],
+          portfolioStocks: this.$store.getters['portfolio/stocks'],
+          stocks: this.$store.getters['stocks/stocks'],
+        };
+
+        this.$http.put('data.json', data)
+                  .then((response) => {
+                    console.log(response);
+                  }, (responseError) => {
+                    console.log(responseError);
+                  });
+      },
+      loadData() {
+        // console.log(this.$store);
+        this.$store.dispatch('loadData');
+      },
       ...mapActions('stocks', [
         'randomize',
       ]),
@@ -74,11 +95,11 @@
     mounted() {
       const $el = $(this.$el.querySelector('.c-dropdown'));
       $el.onBlur(() => {
-        console.log('dropdown blur');
+        // console.log('dropdown blur');
         this.showDropdown = false;
       });
       $el.findChildren('.c-dropdown__toggle').on('click', (e) => {
-        console.log('dropdown toggle clicked');
+        // console.log('dropdown toggle clicked');
         e.preventDefault();
         // if (this.disabled) { return false; }
         this.showDropdown = !this.showDropdown;

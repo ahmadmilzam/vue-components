@@ -51,6 +51,12 @@ export default {
 
       theState.funds += price * quantity;
     },
+    set(state, { funds, stocks = [] }) {
+      const theState = state;
+      console.log('portfolio set data', funds, stocks);
+      theState.funds = funds;
+      theState.stocks = stocks;
+    },
   },
   actions: {
     sell({ commit }, order) {
