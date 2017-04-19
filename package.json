@@ -10,7 +10,7 @@
     "copy": "cp -R src/assets/ dist/assets/",
     "clean-copy": "npm run clean && npm run makedir && npm run copy",
     "prestart": "npm run clean-copy",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --content-base dist --open --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --content-base dist --open --hot",
     "stage": "cross-env NODE_ENV=production webpack-dev-server --content-base dist --open --hot",
     "build": "npm run clean-copy && cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
